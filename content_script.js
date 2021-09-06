@@ -67,7 +67,9 @@ function editName(id, name) {
 async function loadRooms() {
   const json = await sendMessage('')
   const urlsIncludeMeet = JSON.parse(json)
-  const roomUrlsAllowDuplicating = urlsIncludeMeet.filter(u => /^https:\/\/meet\.google\.com\/[0-9a-z\-]+$/.test(u))
+  console.log(urlsIncludeMeet)
+  const roomUrlsWithoutQueryOrInternalLink = urlsIncludeMeet.map(deleteQueryOrInternalLink).filter(url => url !== 'https://meet.google.com/landing')
+  const roomUrlsAllowDuplicating = roomUrlsWithoutQueryOrInternalLink.filter(u => /^https:\/\/meet\.google\.com\/[0-9a-z\-]+$/.test(u))
   const roomUrls = Array.from(new Set(roomUrlsAllowDuplicating))
   const rooms = roomUrls.map(createRoomFromUrl)
   return rooms
@@ -108,17 +110,26 @@ async function main() {
   */
 
   const rooms = await loadRooms()
+  /*
   if (rooms.length < 5) {
+    */
     appendBar(rooms)
     return
+    /*
   }
   const first3 = rooms.slice(0, 3)
   const others = rooms.slice(5)
   const namedOthers = others.filter(r => r.name)
   appendBar([...first3, ...namedOthers])
+  */
+
 }
 
-const thePageUrl = (location.href).split('#')[0].split('?')[0]
+function deleteQueryOrInternalLink(url) {
+  return url.split('#')[0].split('?')[0]
+}
+
+const thePageUrl = deleteQueryOrInternalLink(location.href)
 if (thePageUrl === 'https://meet.google.com/' || thePageUrl === 'https://meet.google.com/landing') {
   main().then(() => {
     console.log('Recent meets is loaded.')
