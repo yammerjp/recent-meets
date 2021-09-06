@@ -1,0 +1,20 @@
+{
+  "name": "Recent Meets",
+  "description": "Add a bar including links to Google Meet's rooms that was joined recently.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "history"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["content_script.js"],
+      "css": ["content_script.css"]
+    }
+  ],
+  "action": {}
+}

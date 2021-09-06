@@ -1,0 +1,26 @@
+#recent-meets-container {
+  padding: 0px 24px;
+  font-size: 16px;
+  color: #555555;
+  display: flex;
+}
+
+#recent-meets-first-inner-container {
+  padding: 4px;
+}
+
+.recent-meets-inner-container {
+  margin: 0px 8px;
+  padding: 4px;
+  background-color: #eeeeee;
+  border-radius: 4px;
+}
+
+.recent-meets-edit-name-button {
+  background-color: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  outline: none !important;
+  padding: 0 !important;
+  appearance: none !important;
+}
