@@ -118,7 +118,8 @@ async function main() {
   appendBar([...first3, ...namedOthers])
 }
 
-if ((location.href).split('#')[0].split('?')[0] === 'https://meet.google.com/') {
+const thePageUrl = (location.href).split('#')[0].split('?')[0]
+if (thePageUrl === 'https://meet.google.com/' || thePageUrl === 'https://meet.google.com/landing') {
   main().then(() => {
     console.log('Recent meets is loaded.')
   })
